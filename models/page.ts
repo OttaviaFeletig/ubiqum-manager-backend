@@ -4,12 +4,14 @@ export interface PageSchemaData extends Document {
   content: string;
   conflPageId: string;
   conflChildrenId: Array<string>;
+  program: string;
 }
 const Page: Schema = new Schema({
   title: String,
   content: String,
   conflPageId: String,
-  conflChildrenId: [String]
+  conflChildrenId: [String],
+  program: String
 });
 
 module.exports = mongoose.model<PageSchemaData>("page", Page);

@@ -28,11 +28,22 @@ const remapPages = async (response: any) => {
         page.children.page.results.forEach((child: any) => {
           childrenId.push(child.id);
         });
+        if (page.title.includes("JAVA")) {
+          console.log(page.title);
+        }
         const onePage: PageI = {
           title: page.title,
           content: page.body.storage.value,
           conflPageId: page.id,
-          conflChildrenId: childrenId
+          conflChildrenId: childrenId,
+          program:
+            page.title.includes("Java ") ||
+            page.title.includes("JAVA") ||
+            page.title.includes("Mobile")
+              ? "JAVA"
+              : page.title.includes("MERN")
+              ? "MERN"
+              : "ALL"
         };
         const newPage = new Page(onePage);
         const savedPage = await newPage.save();
